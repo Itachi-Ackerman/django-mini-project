@@ -8,17 +8,17 @@ from django.shortcuts import render, redirect
 def signup(request):
     if request.method == 'POST':
         un = request.POST['uname']
-        fn = request.POST('fname')
-        ln = request.POST('lname')
-        email = request.POST('mailid')
-        passwd = request.post('pwd')
+        fn = request.POST['fname']
+        ln = request.POST['lname']
+        email = request.POST['mailid']
+        passwd = request.POST['pwd']
         if User.objects.filter(username=un).exists():
             pu.alert("Username already exists")
-            return render(request,'register.html')
+            return render(request,'signup.html')
         else:
             user = User.objects.create_user(username=un,first_name=fn,last_name=ln,email=email,password=passwd)
             user.save()
             pu.confirm("user created")
             return redirect('/')
     else:
-        return render(request,'register.html')
+        return render(request,'signup.html')
